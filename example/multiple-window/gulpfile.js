@@ -8,10 +8,16 @@ gulp.task('serve', function () {
   electron.start();
 
   // Restart browser process
-  gulp.watch('app.js', electron.restart);
+  gulp.watch('app.js', ['restart:electron']);
 
   gulp.watch('*.html', ['reload:renderer']);
 
+});
+
+gulp.task('restart:electron', function (done) {
+  // Reload renderer process
+  electron.restart();
+  done();
 });
 
 gulp.task('reload:renderer', function (done) {

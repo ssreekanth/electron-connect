@@ -24,20 +24,22 @@ gulp.task('serve', function () {
   // });
 
   // Restart browser process
-  gulp.watch('app.js', electron.restart);
+  gulp.watch('app.js', ['restart:electron']);
 
   // Reload renderer process
-  gulp.watch(['index.js', 'index.html'], electron.reload);
+  gulp.watch(['index.js', 'index.html'], ['reload:renderer']);
 });
 
-gulp.task('reload:browser', function () {
+gulp.task('restart:electron', function (done) {
   // Restart main process
   electron.restart();
+  done();
 });
 
-gulp.task('reload:renderer', function () {
+gulp.task('reload:renderer', function (done) {
   // Reload renderer process
   electron.reload();
+  done();
 });
 
 gulp.task('default', ['serve']);
